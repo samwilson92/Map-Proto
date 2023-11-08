@@ -2,9 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Custom Print</title>
+    <title>GPX to Heatmap Visualizer</title>
+    <!-- Google Roboto Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <!-- Custom CSS Styles -->
     <link rel="stylesheet" href="styles.css">
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <!-- Leaflet Heatmap JavaScript -->
+    <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+    <style>
+        /* Inline styles can be moved to the external CSS file if preferred */
+        #map {
+            width: 100%;
+            height: 80vh; /* 80% of the viewport height */
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -20,23 +35,28 @@
 
     <main>
         <section id="print-creator">
-            <h1>Custom Print Creator</h1>
-            <div id="design-area">
+            <header>
+            <h1>Upload a GPX File to Generate a Heatmap</h1>
+            </header>
+            <div id="file-input-container">
+                <input type="file" id="file-input" accept=".gpx" />
+            </div>
+            <div id="map"></div>
                 <!-- The area where users can upload images or choose designs -->
-                <button onclick="uploadImage()">Upload Image</button>
+                <!-- button onclick="uploadImage()">Upload Image</button -->
                 <!-- Additional design tools would go here -->
             </div>
-            <div id="options-panel">
+            <!-- div id="options-panel" -->
                 <!-- Options for the custom print -->
-                <label for="size">Size:</label>
-                <select id="size">
-                    <option value="small">Small</option>
-                    <option value="medium">Medium</option>
-                    <option value="large">Large</option>
-                </select>
+                <!--label for="size">Size:</label-->
+                <!--select id="size"-->
+                    <!--option value="small">Small</option-->
+                    <!--option value="medium">Medium</option-->
+                    <!--option value="large">Large</option-->
+                <!--/select-->
                 <!-- Additional options like color, material, etc. -->
             </div>
-            <button id="addToCart">Add to Cart</button>
+            <!--button id="addToCart">Add to Cart</button-->
         </section>
     </main>
 
