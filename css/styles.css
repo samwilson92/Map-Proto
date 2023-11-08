@@ -79,4 +79,25 @@ header h1 {
     #map {
         height: 300px; /* Smaller map on mobile devices */
     }
+
+    .save-button {
+    padding: 10px 20px;
+    background-color: #34a853; /* Google 'Save' button color */
+    color: #fff;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    margin-left: 10px; /* Spacing between buttons */
+    transition: background-color 0.3s ease;
+}
+
+.save-button:hover {
+    background-color: #2c8b43;
+}
+
+#map-preview {
+    margin-top: 20px;
+}
+
 }
