@@ -6,11 +6,16 @@
     <!-- Google Roboto Font -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
     <!-- Custom CSS Styles -->
     <link rel="stylesheet" href="css/styles.css">
     <!-- Leaflet JavaScript -->
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
     <!-- Leaflet Heatmap JavaScript -->
     <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
     <style>
@@ -42,6 +47,10 @@
                 <label for="file-input" class="upload-button">Choose File</label>
                 <input type="file" id="file-input" accept=".gpx" />
                 <button id="save-button" class="save-button">Create Heatmap</button>
+            </div>
+            <div id="map">
+                #map { height: 360px; }
+            </div>
             <div id="map-preview" style="display: none;">
                 <h3>Map Preview:</h3>
                 <div id="map" style="width: 100%; height: 500px;"></div>
