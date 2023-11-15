@@ -76,9 +76,6 @@ function parseGPX(gpxContents) {
     }
 }
 
-// Declare heatmapLayer variables
-let heatmapLayer;
-
 // Initialize the map
 function initializeMap() {
     if (!map) {
