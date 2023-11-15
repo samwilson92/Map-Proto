@@ -1,38 +1,46 @@
 import 'css/styles.css';
 import Map from 'ol/Map.js';
 import OSM from 'ol/source/OSM.js';
+import StadiaMaps from 'ol/source/StadiaMaps.js';
 import TileLayer from 'ol/layer/Tile.js';
 import View from 'ol/View.js';
 
-const map = new Map({
-  target: 'map',
-  layers: [
-    new TileLayer({
-      source: new OSM(),
-    }),
-  ],
-  view: new View({
-    center: [0, 0],
-    zoom: 2,
-  }),
-});
-
-
+import {fromLonLat} from 'ol/proj.js';
 
 // Elements from the DOM
 const fileInput = document.getElementById('file-input');
 const saveButton = document.getElementById('save-button');
 
 // Global map variables
-let map;
+const map = new Map({
+  layers: [
+    // NOTE: Layers from Stadia Maps do not require an API key for localhost development or most production
+    // web deployments. See https://docs.stadiamaps.com/authentication/ for details.
+    new TileLayer({
+      source: new StadiaMaps({
+        layer: 'stamen_watercolor',
+        // apiKey: 'OPTIONAL'
+      }),
+    }),
+    new TileLayer({
+      source: new StadiaMaps({
+        layer: 'stamen_terrain_labels',
+        // apiKey: 'OPTIONAL'
+      }),
+    }),
+  ],
+  target: 'map',
+  view: new View({
+    center: fromLonLat([-122.416667, 37.783333]),
+    zoom: 12,
+  }),
+});
+
 let heatmapLayer;
 let gpxPoints = [];
 
 // Event listener for file input change
 fileInput.addEventListener('change', handleFileSelect, false);
-
-// Initially hide the save button
-saveButton.style.display = 'none';
 
 // Handle file selection and read the file
 function handleFileSelect(event) {
@@ -45,7 +53,6 @@ function handleFileSelect(event) {
             initializeMap();
             document.getElementById('map-preview').style.display = 'block';
         };
-        
         reader.readAsText(file);
     }
 }
@@ -68,38 +75,4 @@ function parseGPX(gpxContents) {
         console.error('No points found in the GPX file.');
         return;
     }
-
-    // Enable the save button once the GPX is parsed
-    saveButton.style.display = 'inline-block';
-}
-
-// Initialize the map
-function initializeMap() {
-    if (!map) {
-        map = L.map('map').setView([51.505, -0.09], 13);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 18,
-            attribution: '© OpenStreetMap contributors'
-        }).addTo(map);
-    }
-
-    // Fit the map bounds to the GPX points with padding
-    const bounds = L.latLngBounds(gpxPoints).pad(0.1);
-    map.fitBounds(bounds);
-}
-
-// Event listener for the save button to create heatmap
-saveButton.addEventListener('click', createHeatmap, false);
-
-// Create and add the heatmap layer
-function createHeatmap() {
-    if (heatmapLayer) {
-        heatmapLayer.remove(); // Remove the existing heatmap layer if present
-    }
-    
-    heatmapLayer = L.heatLayer(gpxPoints, {
-        radius: 25,
-        blur: 15,
-        maxZoom: 17,
-    }).addTo(map);
 }
