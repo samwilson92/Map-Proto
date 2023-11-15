@@ -11,7 +11,7 @@ const fileInput = document.getElementById('file-input');
 const saveButton = document.getElementById('save-button');
 
 // Global map variables
-const map = new Map({
+let map = new Map({
   layers: [
     // NOTE: Layers from Stadia Maps do not require an API key for localhost development or most production
     // web deployments. See https://docs.stadiamaps.com/authentication/ for details.
@@ -76,8 +76,8 @@ function parseGPX(gpxContents) {
     }
 }
 
-// Declare map and heatmapLayer variables
-let map, heatmapLayer;
+// Declare heatmapLayer variables
+let heatmapLayer;
 
 // Initialize the map
 function initializeMap() {
